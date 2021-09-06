@@ -38,11 +38,19 @@ const Home = () => {
 				key={song.id}
 				className={
 					isPlaying == true && current === index ? "active" : ""
-				}>
+				}
+				onClick={() => playSong(index)}>
 				{index} {song.name}
 			</li>
 		);
 	});
+
+	const playSong = index => {
+		setIsPlaying(true);
+		audioRef.current.src = songURL[index];
+		setCurrent(index);
+		audioRef.current.play();
+	};
 
 	const togglePlayPause = () => {
 		setIsPlaying(!isPlaying);
